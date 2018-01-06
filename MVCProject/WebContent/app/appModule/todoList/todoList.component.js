@@ -3,46 +3,39 @@ angular.module('appModule')
     templateUrl : 'app/appModule/todoList/todoList.component.html',
     
     
-    controller : function(todoService) {
+    controller : function(todoService, $filter) {
         var vm = this;
         
         vm.selected = null;
         
         vm.editTodo = null;
 
+        var date = $filter('date')(Date.now(), 'MM/dd/yyyy');
+        
         vm.todos = [];
         
+        var reloadToDos = function(){
+            todoService.index()    // returns promise of
+                .then(function(response){         
+                    vm.todos = response.data;
+            });
+        };
+        
+        reloadToDos();
+        
         vm.todos = todoService.index();
-//            {
-//              id : 1,
-//              task : 'Go round mums',
-//              description : '',
-//              completed : true
-//            },
-//            {
-//              id : 2,
-//              task : 'Get Liz back',
-//              description : '',
-//              completed : false
-//            },
-//            {
-//              id : 3,
-//              task : 'Sort life out',
-//              description : '',
-//              completed :  false
-//            }
+
+        todoService.index()
+ 		.then(function(response){
+ 			console.log(response);
+ 			console.log(response.data);
+ 			vm.todos = response.data;
+ 			console.log(vm.todos);
+ 		})
+ 		
         
         
-        vm.updateTodo = function() {
-//                vm.todos.forEach(function(todo, idx, array) {
-//                    if (todo.id === edittedTodo.id) {
-//                        array.splice(idx, 1, edittedTodo);
-//                    }
-//                });
-        			todoService.update(vm.editTodo);
-//                vm.selected = vm.editTodo; 
-                vm.editTodo = null;
-        }
+
      
         
         vm.deleteTodo = function(todo){
@@ -61,23 +54,62 @@ angular.module('appModule')
                 vm.selected = todo;
         }
         
-        var generateId = function() {
-            return vm.todos[vm.todos.length-1].id + 1;
-        }
+
+		// reloads index
+		vm.reload = function() {
+			todoService.index().then(function(res) {
+				vm.todos = res.data;
+			})
+		}
+
+		vm.reload();
+        
+//        var generateId = function() {
+//            return vm.todos[vm.todos.length-1].id + 1;
+//        }
         
         vm.countTodos = function() {
             return vm.todos.length;
         }
         
-        vm.addTodo = function(todo) {
-            console.log(todo);
-            var todo = angular.copy(todo);
-            todo.id = generateId();
-            todo.description = '';
-            todo.completed = false;
-            
-            vm.todos.push(todo);
-        }
+     // create
+		vm.addTask = function(newTask) {
+			newTask.completed = false;
+			newTask.description = '';
+
+			var res = todoService.create(newTask);
+
+			res.then(function(res) {
+			
+				vm.reload();
+			})
+		}
+		
+		// Update
+		vm.updateTodo = function(todo) {
+
+			console.log(todo);
+			var res = todoService.update(todo);
+
+			res.then(function(res) {
+				vm.selected = res.data;
+				vm.editTodo = null;
+				vm.reload();
+			})
+
+		}
+		
+
+
+
+		// Delete
+		vm.deleteTodo = function(tid) {
+			var res = todoService.destroy(tid);
+
+			res.then(function(res) {
+				vm.reload();
+			})
+		}
         
     },
     controllerAs : 'vm'

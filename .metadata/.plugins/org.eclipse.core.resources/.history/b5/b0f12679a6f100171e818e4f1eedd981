@@ -1,0 +1,61 @@
+package data;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+import entities.Todo;
+
+public class TodoDAOImpl implements TodoDAO {
+
+	@PersistenceContext
+	private EntityManager em;
+
+	@Override
+	public List<Todo> index() {
+		String query = "Select t from Todo t";
+		return em.createQuery(query, Todo.class).getResultList();
+	}
+
+	@Override
+	public Todo show(int id) {
+		return em.find(Todo.class, id);
+	}
+
+	@Override
+	public Todo create(Todo todo) {
+		em.persist(todo);
+		em.flush();
+		return todo;
+	}
+
+	@Override
+	public Todo update(int id, Todo todo) {
+		Todo t = em.find(Todo.class, id);
+		t.setTask(todo.getTask());
+		t.setDescription(todo.getDescription());
+		t.setCompleted(todo.getCompleted());
+		t.setUserId(todo.getUserId());
+		t.setDueDate(todo.getDueDate());
+		t.setCompleteDate(todo.getCompleteDate());
+		t.setCreatedAt(todo.getCreatedAt());
+		t.setUpdatedAt(todo.getUpdatedAt());
+
+		return t;
+	}
+
+	@Override
+	public boolean destroy(int id) {
+		Todo t = em.find(Todo.class, id);
+
+		if (em.find(Todo.class, id) == null) {
+			return false;
+		} else {
+			em.remove(t);
+			return true;
+		}
+
+	}
+
+}

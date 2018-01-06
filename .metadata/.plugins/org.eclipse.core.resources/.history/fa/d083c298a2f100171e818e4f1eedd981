@@ -1,0 +1,24 @@
+package controllers;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import data.TodoDAO;
+
+@RestController
+public interface TodoController {
+	
+	@Autowired
+	private TodoDAO tododao; 
+	
+	@RequestMapping(path = "ping", method = RequestMethod.GET)
+	public String ping() {
+		System.out.println("Ping");
+	  return "pong";
+	}
+	
+	
+
+}
