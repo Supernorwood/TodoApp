@@ -11,7 +11,7 @@
 
         <properties>
         		<!-- Configure your connection to the database -->
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/ngtodo" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/ngTodo" />
             <property name="javax.persistence.jdbc.user" value="ngtodo" />
             <property name="javax.persistence.jdbc.password" value="ngtodo" />
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
