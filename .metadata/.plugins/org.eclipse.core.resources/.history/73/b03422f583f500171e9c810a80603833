@@ -1,0 +1,32 @@
+package controllers;
+
+@RestController
+public class AuthController {
+  
+  @Autowired
+  private AuthDAO authDAO;
+
+  @RequestMapping(path = "/auth/register", method = RequestMethod.POST)
+  public User register(HttpSession session, @RequestBody User user) {
+    // TODO : Create the provided user, place the user in session, return the user
+    return null;
+  }
+  
+  @RequestMapping(path = "/auth/login", method = RequestMethod.POST)
+  public User login(HttpSession session, @RequestBody User user) {
+    // TODO : Authenticate user object, place the user in session, return the user
+    return null;
+  }
+  
+  @RequestMapping(path = "/auth/logout", method = RequestMethod.POST)
+  public Boolean logout(HttpSession session, HttpServletResponse response) {
+    // TODO : Remove the "user" session, if successfully removed, return true
+    return null;
+  }
+  
+  @RequestMapping(path = "/auth/unauthorized")
+  public String unauth(HttpServletResponse response) {
+    response.setStatus(401);
+    return "unauthorized";
+  }
+}

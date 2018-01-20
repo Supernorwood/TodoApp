@@ -1,0 +1,5 @@
+angular.module('appModule')
+.component('homeComponent', {
+	templateUrl : 'app/appModule/home/home.component.html',
+
+})

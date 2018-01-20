@@ -1,4 +1,3 @@
-
 package controllers;
 
 import java.util.Collection;
@@ -18,71 +17,76 @@ import entities.Todo;
 
 @RestController
 public class TodosController {
-    
-    @Autowired
-    private TodoDAO todoDAO;
+	
+	@Autowired
+	private TodoDAO todoDAO;
 
 //  GET /user/{uid}/todo
-    @RequestMapping(path = "/user/{uid}/todo", method = RequestMethod.GET)
-    public Collection<Todo> index(
-            HttpServletRequest req, 
-            HttpServletResponse res, 
-            @PathVariable int uid) {
-        return todoDAO.index(uid);
-    }
-    
+	@RequestMapping(path = "/user/{uid}/todo", method = RequestMethod.GET)
+	public Collection<Todo> index(
+			HttpServletRequest req, 
+			HttpServletResponse res, 
+			@PathVariable int uid) {
+		return todoDAO.index(uid);
+	}
+	
 //  GET /user/{uid}/todo/{tid}
-    @RequestMapping(path = "/user/{uid}/todo/{tid}", method = RequestMethod.GET)
-    public Todo show(
-                HttpServletRequest req, 
-                HttpServletResponse res, 
-                @PathVariable int uid, 
-                @PathVariable int tid) {
-        return todoDAO.show(uid, tid);
-    }
-    
+	@RequestMapping(path = "/user/{uid}/todo/{tid}", method = RequestMethod.GET)
+	public Todo show(
+				HttpServletRequest req, 
+				HttpServletResponse res, 
+				@PathVariable int uid, 
+				@PathVariable int tid) {
+		Todo t = todoDAO.show(uid, tid);
+		
+		if (t == null) {
+			res.setStatus(404);
+		}
+		return t;
+	}
+	
 //  POST /user/{uid}/todo
-    @RequestMapping(path = "/user/{uid}/todo", method = RequestMethod.POST)
-    public Todo create(
-            HttpServletRequest req, 
-            HttpServletResponse res, 
-            @PathVariable int uid, 
-            @RequestBody String todoJson) {
-        
-        Todo todo = todoDAO.create(uid, todoJson);
-        if (todo == null) {
-            res.setStatus(400);
-        }
-        return todo;
-    }
-    
+	@RequestMapping(path = "/user/{uid}/todo", method = RequestMethod.POST)
+	public Todo create(
+			HttpServletRequest req, 
+			HttpServletResponse res, 
+			@PathVariable int uid, 
+			@RequestBody String todoJson) {
+		
+		Todo todo = todoDAO.create(uid, todoJson);
+		if (todo == null) {
+			res.setStatus(400);
+		}
+		return todo;
+	}
+	
 //  PUT /user/{uid}/todo/{tid}
-    @RequestMapping(path = "/user/{uid}/todo/{tid}", method = RequestMethod.PUT)
-    public Todo update(
-            HttpServletRequest req, 
-            HttpServletResponse res, 
-            @PathVariable int uid, 
-            @PathVariable int tid, 
-            @RequestBody String todoJson) {
-        Todo todo = todoDAO.update(uid, tid, todoJson);
-        if (todo == null) {
-            res.setStatus(400);
-        }
-        return todo;
-    }
-    
+	@RequestMapping(path = "/user/{uid}/todo/{tid}", method = RequestMethod.PUT)
+	public Todo update(
+			HttpServletRequest req, 
+			HttpServletResponse res, 
+			@PathVariable int uid, 
+			@PathVariable int tid, 
+			@RequestBody String todoJson) {
+		Todo todo = todoDAO.update(uid, tid, todoJson);
+		if (todo == null) {
+			res.setStatus(400);
+		}
+		return todo;
+	}
+	
 //  DELETE /user/{uid}/todo/{tid}
-    @RequestMapping(path = "/user/{uid}/todo/{tid}", method = RequestMethod.DELETE)
-    public Boolean destroy(
-            HttpServletRequest req, 
-            HttpServletResponse res, 
-            @PathVariable int uid,
-            @PathVariable int tid) {
-        Boolean result = todoDAO.destroy(uid, tid);
-        if (result == null) {
-            res.setStatus(400);
-        }
-        return result;
-    }
+	@RequestMapping(path = "/user/{uid}/todo/{tid}", method = RequestMethod.DELETE)
+	public Boolean destroy(
+			HttpServletRequest req, 
+			HttpServletResponse res, 
+			@PathVariable int uid,
+			@PathVariable int tid) {
+		Boolean result = todoDAO.destroy(uid, tid);
+		if (result == null) {
+			res.setStatus(404);
+		}
+		return result;
+	}
 
 }

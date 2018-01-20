@@ -15,103 +15,103 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 @Entity
 public class Todo {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    
-    private String task;
-    
-    private String description;
-    
-    private boolean completed;
-    
-    @JsonBackReference
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
-    
-    @Column(name = "due_date")
-    private String dueDate;
-    
-    @Column(name = "complete_date")
-    private String completeDate;
-    
-    @Column(name = "created_at")
-    private Date createdAt;
-    
-    @Column(name = "updated_at")
-    private Date updatedAt;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+	
+	private String task;
+	
+	private String description;
+	
+	private boolean completed;
+	
+	@JsonBackReference
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private User user;
+	
+	@Column(name = "due_date")
+	private String dueDate;
+	
+	@Column(name = "complete_date")
+	private String completeDate;
+	
+	@Column(name = "created_at")
+	private Date createdAt;
+	
+	@Column(name = "updated_at")
+	private Date updatedAt;
 
-    public int getId() {
-        return id;
-    }
+	public int getId() {
+		return id;
+	}
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public String getTask() {
-        return task;
-    }
+	public String getTask() {
+		return task;
+	}
 
-    public void setTask(String task) {
-        this.task = task;
-    }
+	public void setTask(String task) {
+		this.task = task;
+	}
 
-    public String getDescription() {
-        return description;
-    }
+	public String getDescription() {
+		return description;
+	}
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-    public boolean isCompleted() {
-        return completed;
-    }
+	public boolean isCompleted() {
+		return completed;
+	}
 
-    public void setCompleted(boolean completed) {
-        this.completed = completed;
-    }
+	public void setCompleted(boolean completed) {
+		this.completed = completed;
+	}
 
-    public User getUser() {
-        return user;
-    }
+	public User getUser() {
+		return user;
+	}
 
-    public void setUser(User user) {
-        this.user = user;
-    }
+	public void setUser(User user) {
+		this.user = user;
+	}
 
-    public String getDueDate() {
-        return dueDate;
-    }
+	public String getDueDate() {
+		return dueDate;
+	}
 
-    public void setDueDate(String dueDate) {
-        this.dueDate = dueDate;
-    }
+	public void setDueDate(String dueDate) {
+		this.dueDate = dueDate;
+	}
 
-    public String getCompleteDate() {
-        return completeDate;
-    }
+	public String getCompleteDate() {
+		return completeDate;
+	}
 
-    public void setCompleteDate(String completeDate) {
-        this.completeDate = completeDate;
-    }
+	public void setCompleteDate(String completeDate) {
+		this.completeDate = completeDate;
+	}
 
-    public Date getCreatedAt() {
-        return createdAt;
-    }
+	public Date getCreatedAt() {
+		return createdAt;
+	}
 
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
 
-    public Date getUpdatedAt() {
-        return updatedAt;
-    }
+	public Date getUpdatedAt() {
+		return updatedAt;
+	}
 
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-    
+	public void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+	
 }

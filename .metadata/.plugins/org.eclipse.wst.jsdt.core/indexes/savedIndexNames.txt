@@ -1,6 +1,1 @@
 INDEX VERSION 1.4+/Users/gregory/SD/angularTodo/.metadata/.plugins/org.eclipse.wst.jsdt.core/indexes
-1939169672.index
-1751010491.index
-101961211.index
-2665392801.index
-2301117440.index

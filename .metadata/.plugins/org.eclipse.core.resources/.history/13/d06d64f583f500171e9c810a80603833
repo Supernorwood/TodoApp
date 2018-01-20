@@ -1,0 +1,8 @@
+package data;
+
+
+@Transactional
+@Repository
+public class AuthDAOImpl implements AuthDAO {
+
+}

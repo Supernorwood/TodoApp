@@ -1,0 +1,5 @@
+angular.module('appModule')
+.component('notFoundComponent', {
+	templateUrl : 'app/appModule/notFound/notFound.component.html',
+
+})
